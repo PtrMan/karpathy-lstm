@@ -389,6 +389,12 @@ var tick = function() {
     $('#samples').html('');
     for(var q=0;q<5;q++) {
       var pred = predictSentence(model, true, sample_softmax_temperature);
+
+      // we need to escape HTML
+      // TODO< append text without interpreting as HTML >
+      pred = pred.replace("<", "&lt;");
+      pred = pred.replace(">", "&gt;");
+
       var pred_div = '<p>'+pred+'</p>'
       $('#samples').append(pred_div);
     }
@@ -397,6 +403,12 @@ var tick = function() {
     // draw argmax prediction
     $('#argmax').html('');
     var pred = predictSentence(model, false);
+    
+    // we need to escape HTML
+    // TODO< append text without interpreting as HTML >
+    pred = pred.replace("<", "&lt;");
+    pred = pred.replace(">", "&gt;");
+
     var pred_div = '<div class="apred">'+pred+'</div>'
     $('#argmax').append(pred_div);
 
